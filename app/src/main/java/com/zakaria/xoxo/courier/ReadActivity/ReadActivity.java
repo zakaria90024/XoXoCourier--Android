@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 import com.zakaria.xoxo.courier.HomeActivity.HomeActivity;
 import com.zakaria.xoxo.courier.MainActivity.MainActivity;
 import com.zakaria.xoxo.courier.R;
@@ -43,19 +45,17 @@ public class ReadActivity extends AppCompatActivity {
     ProgressDialog pd;
     List<Post> modelList = new ArrayList<>();
     APIService apiInterface;
+    private StartAppAd startAppAd = new StartAppAd(this);
 
-    @Override
-    public void onBackPressed() {
-        Intent setIntent = new Intent(ReadActivity.this, HomeActivity.class);
-        startActivity(setIntent);
-        finish();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //        //for startapps ads
+        StartAppSDK.init(this, "201848149", true);
         setContentView(R.layout.activity_read);
         recyclerView = findViewById(R.id.recyclerId);
+
 
         //progress diaglog
         pd = new ProgressDialog(this);
@@ -71,6 +71,13 @@ public class ReadActivity extends AppCompatActivity {
         //deleteData(23);
         //serchData("");
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(ReadActivity.this, HomeActivity.class);
+        startActivity(setIntent);
+        StartAppAd.onBackPressed(this);
+        finish();
     }
 
 

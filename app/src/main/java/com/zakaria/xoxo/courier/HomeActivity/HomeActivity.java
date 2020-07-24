@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 import com.zakaria.xoxo.courier.MainActivity.MainActivity;
 import com.zakaria.xoxo.courier.R;
 import com.zakaria.xoxo.courier.ReadActivity.ReadActivity;
@@ -74,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "201848149", true);
         setContentView(R.layout.activity_home);
 
         btn_deliber = findViewById(R.id.btn_deliber);
@@ -107,5 +110,11 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public void onBackPressed() {
+
+        StartAppAd.onBackPressed(this);
+        finish();
     }
 }

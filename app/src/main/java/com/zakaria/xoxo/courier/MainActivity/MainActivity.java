@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 import com.zakaria.xoxo.courier.HomeActivity.HomeActivity;
 import com.zakaria.xoxo.courier.R;
 import com.zakaria.xoxo.courier.ReadActivity.ReadActivity;
@@ -36,16 +38,12 @@ public class MainActivity extends AppCompatActivity {
     TextView tres;
     private APIService mAPIService;
     ProgressDialog pd;
-    @Override
-    public void onBackPressed() {
-        Intent setIntent = new Intent(MainActivity.this, HomeActivity.class);
-        startActivity(setIntent);
-        finish();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "201848149", true);
         setContentView(R.layout.activity_main);
 
         mAPIService = ApiUtils.getAPIService();
@@ -151,6 +149,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(setIntent);
+        StartAppAd.onBackPressed(this);
+        finish();
     }
 
 
